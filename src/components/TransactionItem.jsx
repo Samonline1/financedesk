@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useTheme } from "../hooks/useTheme";
+import { formatInr } from "../utils/format";
 
 function TransactionItem({ txn }) {
   const { theme } = useTheme();
@@ -32,8 +33,8 @@ function TransactionItem({ txn }) {
           txn.type === "income" ? "text-green-600" : "text-rose-600"
         )}
       >
-        {txn.type === "income" ? "+" : "-"}$
-        {txn.amount.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+        {txn.type === "income" ? "+" : "-"}
+        {formatInr(txn.amount)}
       </p>
       <p className="text-right sm:text-left text-ink-800">{txn.category}</p>
     </div>

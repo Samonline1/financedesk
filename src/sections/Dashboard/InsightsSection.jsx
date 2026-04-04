@@ -2,6 +2,7 @@ import { Lightbulb } from "lucide-react";
 import useTransactions from "../../hooks/useTransactions";
 import { monthOverMonth } from "../../utils/calculations";
 import { useTheme } from "../../hooks/useTheme";
+import { formatInr } from "../../utils/format";
 
 function InsightsSection() {
   const { theme } = useTheme();
@@ -27,7 +28,7 @@ function InsightsSection() {
             <span className="px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wide bg-rose-900/40 ">
               spend
             </span>
-            Highest burn in {summary.highestSpend.name} (${Math.abs(summary.highestSpend.total).toLocaleString()}).
+            Highest burn in {summary.highestSpend.name} ({formatInr(Math.abs(summary.highestSpend.total))}).
           </li>
         )}
         {delta && (
@@ -35,7 +36,7 @@ function InsightsSection() {
             <span className="px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wide bg-blue-900/40 ">
               trend
             </span>
-            Net cash {delta.delta >= 0 ? "up" : "down"} {Math.abs(delta.delta).toLocaleString()} vs previous month ({delta.currentMonth}).
+            Net cash {delta.delta >= 0 ? "up" : "down"} {formatInr(Math.abs(delta.delta))} vs previous month ({delta.currentMonth}).
           </li>
         )}
         <li className="flex gap-2">

@@ -11,6 +11,7 @@ import {
 import useTransactions from "../../hooks/useTransactions";
 import EmptyState from "../../components/EmptyState";
 import { useTheme } from "../../hooks/useTheme";
+import { formatInr } from "../../utils/format";
 
 const ChartTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null;
@@ -19,7 +20,7 @@ const ChartTooltip = ({ active, payload, label }) => {
       <p className="font-medium text-slate-700">{label}</p>
       {payload.map((entry) => (
         <p key={entry.dataKey} className="text-slate-600">
-          {entry.name}: ${entry.value.toLocaleString()}
+          {entry.name}: {formatInr(entry.value)}
         </p>
       ))}
     </div>
@@ -53,36 +54,30 @@ function ChartsSection() {
       <div className="h-72 sm:h-80">
         <ResponsiveContainer>
           <AreaChart data={monthlySeries} margin={{ left: 0, right: 0 }}>
-            <defs>
-              <linearGradient id="income" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#34d399" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="#34d399" stopOpacity={0} />
-              </linearGradient>
-              <linearGradient id="expense" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#f472b6" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="#f472b6" stopOpacity={0} />
-              </linearGradient>
-            </defs>
             <CartesianGrid strokeDasharray="4 4" vertical={false} stroke="#e2e8f0" />
             <XAxis dataKey="month" tickLine={false} />
-            <YAxis tickLine={false} axisLine={false} tickFormatter={(v) => `$${v / 1000}k`} />
+            <YAxis
+              tickLine={false}
+              axisLine={false}
+              tickFormatter={(v) => formatInr(v, { notation: "compact", maximumFractionDigits: 1 })}
+            />
             <Tooltip content={<ChartTooltip />} />
             <Legend />
             <Area
               type="monotone"
               dataKey="income"
               name="Income"
-              stroke="#059669"
-              fillOpacity={1}
-              fill="url(#income)"
+              stroke="#B7EF3A"
+              fillOpacity={0.35}
+              fill="#728d31"
             />
             <Area
               type="monotone"
               dataKey="expense"
               name="Expense"
-              stroke="#e11d48"
-              fillOpacity={1}
-              fill="url(#expense)"
+              stroke="#ef4444"
+              fillOpacity={0.3}
+              fill="#ef4444"
             />
           </AreaChart>
         </ResponsiveContainer>

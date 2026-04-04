@@ -36,8 +36,9 @@ function Layout() {
           }`}
         >
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent-purple to-ink-900 grid place-items-center font-semibold text-white">
+            <div className="w-10 h-10 rounded-xl bg-accent-green/80 grid place-items-center font-semibold text-white">
               FD
+              <img src="" alt="" srcset="" />
             </div>
             <div>
               <p

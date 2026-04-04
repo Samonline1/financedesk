@@ -1,5 +1,6 @@
 import { ArrowUpCircle, ArrowDownCircle, Wallet } from "lucide-react";
 import { useTheme } from "../hooks/useTheme";
+import { formatInr } from "../utils/format";
 
 const icons = {
   income: ArrowUpCircle,
@@ -34,7 +35,7 @@ function SummaryCard({ label, amount, type, hint }) {
         </span>
         <div>
           <p className="text-3xl sm:text-4xl font-semibold tracking-tight ">
-            ${amount.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+            {formatInr(amount)}
           </p>
           {hint && <p className="text-sm text-ink-400 mt-1">{hint}</p>}
         </div>
